@@ -57,13 +57,11 @@ fun main() {
     fun String.findPartNumbers(y: Int, input: List<String>): Int {
         val numberParser = """(\d+)""".toRegex()
         val numberGroups = numberParser.findAll(this)
-        return numberGroups.map { matchResult ->
-            matchResult.let {
-                if (isPartNumber(input = input, y = y, x = it.range)) {
-                    it.value.toInt()
-                } else {
-                    0
-                }
+        return numberGroups.map {
+            if (isPartNumber(input = input, y = y, x = it.range)) {
+                it.value.toInt()
+            } else {
+                0
             }
         }.sum()
     }
